@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hdn.zp.dao.RegionMapper">
+
+  <resultMap id="regionMap" type="com.hdn.zp.model.Region">
+                  <id property="id" column="id"/>
+                        <result property="code" column="code"/>
+                        <result property="name" column="name"/>
+                        <result property="level" column="level"/>
+                        <result property="parentId" column="parent_id"/>
+                        <result property="sortNumber" column="sort_number"/>
+                        <result property="path" column="path"/>
+                        <result property="abbr" column="abbr"/>
+                        <result property="spelling" column="spelling"/>
+                        <result property="shortSpelling" column="short_spelling"/>
+                        <result property="creator" column="creator"/>
+                        <result property="createTime" column="create_time"/>
+                        <result property="updateTime" column="update_time"/>
+                        <result property="modifier" column="modifier"/>
+            </resultMap>
+</mapper>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hdn.zp.dao.PositionResumeRelMapper">
+
+  <resultMap id="positionResumeRelMap" type="com.hdn.zp.model.PositionResumeRel">
+                  <id property="id" column="id"/>
+                        <result property="positionid" column="positionId"/>
+                        <result property="resumeid" column="resumeID"/>
+                        <result property="tddate" column="tdDate"/>
+                        <result property="status" column="status"/>
+                        <result property="createTime" column="create_time"/>
+                        <result property="modifyTime" column="modify_time"/>
+            </resultMap>
+</mapper>

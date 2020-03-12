@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.hdn.zp.dao.ResumeMapper">
+
+  <resultMap id="resumeMap" type="com.hdn.zp.model.Resume">
+                  <id property="id" column="id"/>
+                        <result property="userId" column="user_id"/>
+                        <result property="resumeName" column="resume_name"/>
+                        <result property="resumePhone" column="resume_phone"/>
+                        <result property="resumeEmail" column="resume_email"/>
+                        <result property="sex" column="sex"/>
+                        <result property="birth" column="birth"/>
+                        <result property="college" column="college"/>
+                        <result property="major" column="major"/>
+                        <result property="education" column="education"/>
+                        <result property="location" column="location"/>
+                        <result property="job" column="job"/>
+                        <result property="salary" column="salary"/>
+                        <result property="technology" column="technology"/>
+                        <result property="experience" column="experience"/>
+                        <result property="introducation" column="introducation"/>
+            </resultMap>
+</mapper>
