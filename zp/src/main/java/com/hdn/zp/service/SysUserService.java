@@ -3,6 +3,7 @@ package com.hdn.zp.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.hdn.zp.model.SysUser;
+import com.hdn.zp.utils.R;
 
 /**
  * 系统管理员表
@@ -12,4 +13,5 @@ import com.hdn.zp.model.SysUser;
  */
 public interface SysUserService extends IService<SysUser> {
 
+    R registerMcUser(SysUser sysUser);
 }

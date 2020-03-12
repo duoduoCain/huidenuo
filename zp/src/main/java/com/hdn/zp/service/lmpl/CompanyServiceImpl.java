@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -29,8 +30,8 @@ public class CompanyServiceImpl extends ServiceImpl<CompanyMapper, Company> impl
 
 
     @Override
-    public List<Company> selectAll() {
-        List<Company> list = companyMapper.selectList();
+    public List<Company> selectAll(Company company) {
+        List<Company> list = companyMapper.selectList(company);
         return list;
     }
 }

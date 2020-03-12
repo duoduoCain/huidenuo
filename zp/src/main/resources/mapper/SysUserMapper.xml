@@ -19,4 +19,7 @@
                         <result property="qqOpenid" column="qq_openid"/>
                         <result property="tenantId" column="tenant_id"/>
             </resultMap>
+      <insert id="insertUser">
+
+      </insert>
 </mapper>

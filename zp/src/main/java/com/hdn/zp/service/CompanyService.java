@@ -13,6 +13,6 @@ import java.util.List;
  */
 public interface CompanyService extends IService<Company> {
 
-    public List<Company> selectAll();
+    public List<Company> selectAll(Company company);
 
 }

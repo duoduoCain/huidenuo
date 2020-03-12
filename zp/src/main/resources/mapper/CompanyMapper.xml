@@ -27,7 +27,76 @@
           id ,username , password ,telphone,email,wx ,reg_time ,
       companyname  ,area  ,companyproperty   , `describe`   , yyzz , contact , phone   ,address,create_time, modify_time
       </sql>
-      <select id="selectList" resultMap="companyMap">
-            select <include refid="baseColumns" /> from company
+    <sql id="baseWhere">
+        <if test="username != null  and username != ''"> and username = #{username}</if>
+        <if test="password != null  and password != ''"> and password = #{password}</if>
+        <if test="telphone != null  and telphone != ''"> and telphone = #{telphone}</if>
+        <if test="email != null and email !=''"> and email = #{email}</if>
+        <if test="wx != null and wx !=''"> and wx = #{wx}</if>
+        <if test="regTime != null "> and reg_time = #{regTime}</if>
+        <if test="companyname != null  and companyname != ''"> and companyname = #{companyname}</if>
+        <if test="area != null  and area != ''"> and area = #{area}</if>
+        <if test="companyproperty != null  and companyproperty != ''"> and companyproperty = #{companyproperty}</if>
+        <if test="describe != null  and describe != ''"> and `describe` = #{describe}</if>
+        <if test="yyzz != null  and yyzz != ''"> and yyzz = #{yyzz}</if>
+        <if test="contact != null  and contact != ''"> and contact = #{contact}</if>
+        <if test="address != null  and yyzz != ''"> and yyzz = #{address}</if>
+        <if test="createTime != null  and createTime != ''"> and create_time = #{createTime}</if>
+        <if test="modifyTime != null  and modifyTime != ''"> and modify_time = #{modifyTime}</if>
+    </sql>
+      <select id="selectList"  parameterType="com.hdn.zp.model.Company" resultMap="companyMap">
+            select <include refid="baseColumns" /> from company where 1=1 <include refid="baseWhere"/>
        </select>
+    <insert id="insertCompany" parameterType="ArrayList" useGeneratedKeys="true" keyProperty="id">
+        insert into company
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            username , password ,telphone,email,wx ,reg_time ,
+            companyname  ,area  ,companyproperty   , `describe`   , yyzz , contact , phone   ,address,create_time, modify_time,
+        </trim>
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                #{item.username},
+                #{item.password},
+                #{item.telphone},
+                #{item.email},
+                #{item.wx},
+                #{item.regTime},
+                #{item.companyname},
+                #{item.area},
+                #{item.companyproperty},
+                #{item.describe},
+                #{item.yyzz},
+                #{item.contact},
+                #{item.phone},
+                #{item.address},
+                #{item.createTime},
+                #{item.modifyTime},
+            </trim>
+        </foreach>
+    </insert>
+    <update id="updateCompany" parameterType="ArrayList">
+        <foreach collection="list" item="item" index="index" separator=";">
+            update company
+            <trim prefix="SET" suffixOverrides=",">
+                <if test="item.username != null  and item.username != ''">username = #{item.username},</if>
+                <if test="item.password != null  and item.password != ''">password = #{item.password},</if>
+                <if test="item.telphone != null  and item.telphone != ''">telphone = #{item.telphone},</if>
+                <if test="item.email != null  and item.email != '' ">email = #{item.email},</if>
+                <if test="item.wx != null  and item.wx != '' ">wx = #{item.wx},</if>
+                <if test="item.regTime != null ">reg_time = #{item.regTime},</if>
+                <if test="item.companyname != null  and item.companyname != ''">companyname = #{item.companyname},</if>
+                <if test="item.area != null  and item.area != ''">area = #{item.area},</if>
+                <if test="item.companyproperty != null  and item.companyproperty != ''">companyproperty = #{item.companyproperty},</if>
+                <if test="item.describe != null  and item.describe != ''">`describe` = #{item.describe},</if>
+                <if test="item.yyzz != null ">yyzz = #{item.yyzz},</if>
+                <if test="item.contact != null  and item.contact != ''">contact = #{item.contact},</if>
+                <if test="item.phone != null  and item.phone != ''">phone = #{item.phone},</if>
+                <if test="item.address != null ">address = #{item.address},</if>
+                <if test="item.createTime != null  and item.createTime != ''">create_time = #{item.createTime},</if>
+                <if test="item.modifyTime != null  and item.modifyTime != '' ">modify_time = #{item.modifyTime},</if>
+            </trim>
+            where id = #{item.id}
+        </foreach>
+    </update>
 </mapper>

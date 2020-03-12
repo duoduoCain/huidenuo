@@ -2,10 +2,13 @@ package com.hdn.zp.controller;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.hdn.zp.common.BaseController;
 import com.hdn.zp.model.SysUser;
 import com.hdn.zp.service.SysUserService;
 import com.hdn.zp.utils.R;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -16,11 +19,30 @@ import org.springframework.web.bind.annotation.*;
  * @date 2020-03-10 10:30:32
  */
 @RestController
-@AllArgsConstructor
 @RequestMapping("/sysuser")
-public class SysUserController {
+@Slf4j
+public class SysUserController extends BaseController {
 
-  private final SysUserService sysUserService;
+  @Autowired
+  private  SysUserService sysUserService;
+
+
+  /**
+   * 注册，跨域使用的
+   */
+  @GetMapping("register") // 跨域使用的
+  public R registGet(SysUser sysUser) {
+    return doRegister(sysUser);
+  }
+
+  private R doRegister(SysUser sysUser) {
+    try {
+      return sysUserService.registerMcUser(sysUser);
+    } catch (Exception e) {
+      log.error("注册异常:", e);
+      return R.error("系统繁忙,请稍后再试");
+    }
+  }
 
   /**
    * 分页查询

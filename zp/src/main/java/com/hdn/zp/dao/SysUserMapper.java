@@ -12,4 +12,7 @@ import com.hdn.zp.model.SysUser;
  */
 public interface SysUserMapper extends BaseMapper<SysUser> {
 
+    Integer insertUser(SysUser sysUser);
+
+
 }

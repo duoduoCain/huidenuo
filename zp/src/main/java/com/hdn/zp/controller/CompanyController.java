@@ -41,7 +41,7 @@ public class CompanyController {
 
   @GetMapping("/list")
   public R getCompanyPageList(Page page, Company company) {
-    return  new R<>(companyService.selectAll());
+    return  new R<>(companyService.selectAll(company));
   }
 
 

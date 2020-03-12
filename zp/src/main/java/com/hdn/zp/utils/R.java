@@ -54,5 +54,18 @@ public class R<T> implements Serializable {
     public static <T> R ok(T data) {
         return new R(data);
     }
+	public static R error() {
+		return error(500, "未知异常，请联系管理员");
+	}
+
+	public static R error(String msg) {
+		return error(500, msg);
+	}
+
+	public static R error(int code, String msg) {
+		R r = new R();
+		r.msg = msg;
+		return r;
+	}
 
 }

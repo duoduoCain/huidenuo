@@ -13,6 +13,6 @@ import java.util.List;
  */
 public interface CompanyMapper extends BaseMapper<Company> {
 
-    public List<Company> selectList();
+    public List<Company> selectList(Company company);
 
 }
