@@ -2,6 +2,7 @@ package com.hdn.zp.controller;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.hdn.zp.common.BaseController;
 import com.hdn.zp.model.Company;
 import com.hdn.zp.service.CompanyService;
 import com.hdn.zp.utils.R;
@@ -21,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/company")
-public class CompanyController {
+public class CompanyController extends BaseController{
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CompanyController.class);
 
