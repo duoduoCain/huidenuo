@@ -5,11 +5,16 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hdn.zp.common.BaseController;
 import com.hdn.zp.model.SysUser;
 import com.hdn.zp.service.SysUserService;
+import com.hdn.zp.utils.Contants;
 import com.hdn.zp.utils.R;
+import com.hdn.zp.utils.RedisUtils;
+import com.hdn.zp.utils.ServletUtils;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 
 
 /**
@@ -25,7 +30,8 @@ public class SysUserController extends BaseController {
 
   @Autowired
   private  SysUserService sysUserService;
-
+  @Resource
+  private RedisUtils redisUtils;
 
   /**
    * 注册，跨域使用的
@@ -42,6 +48,19 @@ public class SysUserController extends BaseController {
       log.error("注册异常:", e);
       return R.error("系统繁忙,请稍后再试");
     }
+  }
+
+
+  @GetMapping("login")
+  public R login(SysUser sysUser){
+    //判断是否登陆了
+    sysUser.setPhone("asdf");
+    redisUtils.set(Contants.TOKEN+"_"+sysUser.getPhone(),sysUser,3600);
+//    String header = ServletUtils.getRequest().getHeader(Contants.ACCESS_TOKEN);
+
+//    ServletUtils.getRequest().
+
+    return R.ok();
   }
 
   /**

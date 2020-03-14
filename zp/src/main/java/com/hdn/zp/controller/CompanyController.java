@@ -56,6 +56,14 @@ public class CompanyController extends BaseController {
    return companyService.selectList(company);
 
   }
+  @PostMapping("updateCompany")
+  public R<Integer> updateCompanyList(@RequestBody  Company company){
+      List<Company > companyList =new ArrayList<>();
+      company.setModifyTime(DateUtils.getNowDate());
+      companyList.add(company);
+      return R.ok(companyService.updateCompany(companyList));
+  }
+
 
   /**
    * 新增企业注册表
