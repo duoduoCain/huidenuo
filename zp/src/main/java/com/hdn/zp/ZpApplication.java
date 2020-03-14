@@ -24,6 +24,7 @@ import javax.sql.DataSource;
 @SpringBootApplication
 @EnableTransactionManagement
 @ServletComponentScan
+@EnableAutoConfiguration
 public class ZpApplication extends SpringBootServletInitializer {
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {

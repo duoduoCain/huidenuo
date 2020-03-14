@@ -37,41 +37,12 @@ public class Contants {
      */
     public static final String LOGIN_FAIL = "Error";
 
-    /**
-     * 自动去除表前缀
-     */
-    public static final String AUTO_REOMVE_PRE = "true";
-
-    /**
-     * 当前记录起始索引
-     */
-    public static final String PAGE_NUM = "pageNum";
-
-    /**
-     * 每页显示记录数
-     */
-    public static final String PAGE_SIZE = "pageSize";
-
-    /**
-     * 排序列
-     */
-    public static final String ORDER_BY_COLUMN = "sortField";
-
-    /**
-     * 排序的方向 "desc" 或者 "asc".
-     */
-    public static final String IS_ASC = "sortOrder";
-
     // 用户ID
     public static final String CURRENT_ID = "current_id";
-    // 登录账号/用户名
-    public static final String CURRENT_LOGINNAME = "current_loginname";
     // 用户昵称/姓名
     public static final String CURRENT_USERNAME = "current_username";
-    // 商户ID
-    public static final String CURRENT_MERC_ID = "current_merc_id";
-    // 商户账号
-    public static final String CURRENT_MERCNAME = "current_mercname";
+    // 手机号
+    public static final String CURRENT_PHONE = "current_phone";
     // 用户类型
     public static final String CURRENT_USERTYPE = "current_usertype";
 
