@@ -10,4 +10,56 @@
                         <result property="createTime" column="create_time"/>
                         <result property="modifyTime" column="modify_time"/>
             </resultMap>
+
+    <sql id="baseCloums">
+        id, name, describe, create_time, modify_time
+    </sql>
+    <sql id="baseWhere">
+        <if test="name !=null  and  name !='' ">and name=#{name}</if>
+        <if test="describe !=null  and  describe !='' ">and describe=#{describe}</if>
+        <if test="create_time !=null  and  create_time !='' ">and create_time=#{create_time}</if>
+        <if test="modify_time !=null  and  modify_time !='' ">and modify_time=#{modify_time}</if>
+    </sql>
+
+    <select id="selectList" parameterType="com.hdn.zp.model.PositionType" resultMap="positionTypeMap">
+        select  <include refid="baseCloums"></include>  from position_type where 1=1 <include
+            refid="baseWhere"></include>
+    </select>
+
+
+    <insert id="insertPosition_type" parameterType="ArrayList" useGeneratedKeys="true" keyProperty="id">
+        insert into position_type
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            name, describe, create_time, modify_time
+        </trim>
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                #{item.name},
+                #{item.describe},
+                #{item.create_time},
+                #{item.modify_time},
+            </trim>
+        </foreach>
+    </insert>
+
+    <update id="updatePosition_type" parameterType="ArrayList">
+        <foreach collection="list" item="item" index="index" separator=";">
+            update position_type
+            <trim prefix="SET" suffixOverrides=",">
+                <if test="item.name != null  and item.name != ''">name = #{item.name}</if>
+                <if test="item.describe != null  and  item.describe !='' ">describe =#{item.describe}</if>
+                <if test="item.create_time != null  and  item.create_time !='' ">create_time =#{item.create_time}</if>
+                <if test="item.modify_time != null  and  item.modify_time !='' ">modify_time =#{item.modify_time}</if>
+            </trim>
+            where id = #{item.id}
+        </foreach>
+    </update>
+
+    <delete id="deletePosition_type" parameterType="com.hdn.zp.model.PositionType">
+        DELETE   FROM   position_type
+        <if test="id !=null">
+            where  position_type.id=#{id}
+        </if>
+    </delete>
 </mapper>

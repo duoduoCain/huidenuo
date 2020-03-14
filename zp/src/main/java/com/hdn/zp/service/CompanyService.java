@@ -2,6 +2,7 @@ package com.hdn.zp.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.hdn.zp.model.Company;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -13,6 +14,12 @@ import java.util.List;
  */
 public interface CompanyService extends IService<Company> {
 
-    public List<Company> selectAll(Company company);
+    public List<Company> selectList(@Param("company") Company company);
+
+    public int insertCompany(@Param("company") List<Company> company);
+
+    public int  updateCompany(@Param("company") List<Company> company);
+
+    public int  deleteCompany(@Param("id") long id);
 
 }

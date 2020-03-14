@@ -5,12 +5,16 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hdn.zp.common.BaseController;
 import com.hdn.zp.model.Company;
 import com.hdn.zp.service.CompanyService;
+import com.hdn.zp.utils.DateUtils;
 import com.hdn.zp.utils.R;
+import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -22,12 +26,19 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/company")
-public class CompanyController extends BaseController{
+public class CompanyController extends BaseController {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CompanyController.class);
 
     @Autowired
     private final CompanyService companyService;
+
+  /*  @PostMapping("insertCompany")
+    public int insertCompany(@RequestBody Company   company){
+        List<Company> list = new ArrayList<>();
+        list.add(company);
+        return companyService.insertCompany(list);
+    }*/
 
   /**
    * 分页查询
@@ -40,20 +51,10 @@ public class CompanyController extends BaseController{
     return  new R<>(companyService.page(page,Wrappers.query(company)));
   }
 
-  @GetMapping("/list")
-  public R getCompanyPageList(Page page, Company company) {
-    return  new R<>(companyService.selectAll(company));
-  }
+  @RequestMapping(value = "getselectList",method = RequestMethod.GET)
+  public List<Company>  getselectList(Company company){
+   return companyService.selectList(company);
 
-
-  /**
-   * 通过id查询企业注册表
-   * @param id id
-   * @return R
-   */
-  @GetMapping("/{id}")
-  public R getById(@PathVariable("id") Integer id){
-    return new R<>(companyService.getById(id));
   }
 
   /**
@@ -61,29 +62,38 @@ public class CompanyController extends BaseController{
    * @param company 企业注册表
    * @return R
    */
-  @PostMapping
-  public R save(@RequestBody Company company){
-    return new R<>(companyService.save(company));
+  @RequestMapping(value = "getinsertCompany",method = RequestMethod.POST)
+   public int  getinsertCompany(@RequestBody Company  company){
+      List<Company>  list  = new ArrayList<>();
+      list.add(company);
+    return companyService.insertCompany(list);
   }
-
   /**
    * 修改企业注册表
    * @param company 企业注册表
    * @return R
    */
+  //这里要加请求路径
+  //批量更新做一个  单个更新做一个借口
   @PutMapping
-  public R updateById(@RequestBody Company company){
-    return new R<>(companyService.updateById(company));
+  public   int  getupdateCompany(List<Company> company){
+      //更新的时候吧时间也更新了
+
+    //  DateUtils.getNowDateOnly();//这个可以获取当前时间
+      //时间格式是YYYY_MM_DD
+    //  DateUtils.getNowDate();//这个是获取 YYYY_MM_DD HH:MM:ss
+    return  companyService.updateCompany(company);
   }
+
 
   /**
    * 通过id删除企业注册表
    * @param id id
    * @return R
    */
-  @DeleteMapping("/{id}")
-  public R removeById(@PathVariable Integer id){
-    return new R<>(companyService.removeById(id));
+  //删除借口可以不做  这里加上标识的路径
+  @DeleteMapping("/delete/{id}")
+  public  int  getdeleteCompany(Long  id){
+    return  companyService.deleteCompany(id);
   }
-
 }

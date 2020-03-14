@@ -2,11 +2,13 @@ package com.hdn.zp.controller;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.hdn.zp.utils.R;
 import com.hdn.zp.model.Position;
 import com.hdn.zp.service.PositionService;
+import com.hdn.zp.utils.R;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 /**
@@ -33,15 +35,9 @@ public class PositionController {
     return  new R<>(positionService.page(page,Wrappers.query(position)));
   }
 
-
-  /**
-   * 通过id查询职位表
-   * @param id id
-   * @return R
-   */
-  @GetMapping("/{id}")
-  public R getById(@PathVariable("id") Integer id){
-    return new R<>(positionService.getById(id));
+  @GetMapping
+  public List<Position>  getselectPosition(Position  position){
+    return  positionService.selectList(position);
   }
 
   /**
@@ -50,28 +46,26 @@ public class PositionController {
    * @return R
    */
   @PostMapping
-  public R save(@RequestBody Position position){
-    return new R<>(positionService.save(position));
+   public int  getinsertPosition(List<Position>  position){
+    return   positionService.insertPosition(position);
   }
-
   /**
    * 修改职位表
    * @param position 职位表
    * @return R
    */
   @PutMapping
-  public R updateById(@RequestBody Position position){
-    return new R<>(positionService.updateById(position));
+   public  int  getupdatePosition(List<Position> position){
+    return  positionService.updatePosition(position);
   }
-
   /**
    * 通过id删除职位表
    * @param id id
    * @return R
    */
   @DeleteMapping("/{id}")
-  public R removeById(@PathVariable Integer id){
-    return new R<>(positionService.removeById(id));
+  public int  getdeletePosition(Long  id){
+    return   positionService.deleteposition(id);
   }
 
 }
