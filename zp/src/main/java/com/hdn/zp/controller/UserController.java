@@ -3,11 +3,14 @@ package com.hdn.zp.controller;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
+import com.hdn.zp.model.Resume;
 import com.hdn.zp.model.User;
 import com.hdn.zp.service.UserService;
 import com.hdn.zp.utils.R;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 /**
@@ -37,12 +40,12 @@ public class UserController {
 
   /**
    * 通过id查询
-   * @param id id
+   * @param user id
    * @return R
    */
-  @GetMapping("/{id}")
-  public R getById(@PathVariable("id") Integer id){
-    return new R<>(userService.getById(id));
+  @GetMapping
+  public List<User> getselectListUser(User  user){
+    return userService.selectList(user);
   }
 
   /**
@@ -52,10 +55,9 @@ public class UserController {
    */
 
   @PostMapping
-  public R save(@RequestBody User user){
-    return new R<>(userService.save(user));
+   public  int  getinsertUser(List<User>  user){
+    return  userService.insertUser(user);
   }
-
   /**
    * 修改
    * @param user 
@@ -63,8 +65,8 @@ public class UserController {
    */
 
   @PutMapping
-  public R updateById(@RequestBody User user){
-    return new R<>(userService.updateById(user));
+  public  int  getupdateUser(List<User>  user){
+    return  userService.updateUser(user);
   }
 
   /**
@@ -74,8 +76,8 @@ public class UserController {
    */
 
   @DeleteMapping("/{id}")
-  public R removeById(@PathVariable Integer id){
-    return new R<>(userService.removeById(id));
+  public  int  getdeleteUser(Long id){
+    return  userService.deleteUser(id);
   }
 
 }

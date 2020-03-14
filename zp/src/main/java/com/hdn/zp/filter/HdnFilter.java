@@ -49,21 +49,21 @@ public class HdnFilter implements Filter {
         log.debug("当前登陆的url是"+requestURI);
         if(list.contains(requestURI)){
             log.debug("系统白名单"+requestURI);
-            filterChain.doFilter(servletRequest,servletResponse);
         }
-        String header = req.getHeader(Contants.TOKEN);
-        if(StringUtils.isBlank(header)){
-            servletResponse.setContentType("application/json; charset=utf-8");
-            servletResponse.setCharacterEncoding("UTF-8");
-            R<String> r = new R<>();
-            r.setMsg("token失效");
-            log.error("token失效");
-            String userJson = convertObjectToJson(r);
-            OutputStream out = servletResponse.getOutputStream();
-            out.write(userJson.getBytes("UTF-8"));
-            out.flush();
-            return;
-        }
+        filterChain.doFilter(servletRequest,servletResponse);
+//        String header = req.getHeader(Contants.TOKEN);
+//        if(StringUtils.isBlank(header)){
+//            servletResponse.setContentType("application/json; charset=utf-8");
+//            servletResponse.setCharacterEncoding("UTF-8");
+//            R<String> r = new R<>();
+//            r.setMsg("token失效");
+//            log.error("token失效");
+//            String userJson = convertObjectToJson(r);
+//            OutputStream out = servletResponse.getOutputStream();
+//            out.write(userJson.getBytes("UTF-8"));
+//            out.flush();
+//            return;
+//        }
         //没有redis 做token缓存有点困难  打算做成数据库形式的
 
 

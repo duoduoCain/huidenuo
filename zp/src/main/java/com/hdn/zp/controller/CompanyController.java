@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.hdn.zp.common.BaseController;
 import com.hdn.zp.model.Company;
 import com.hdn.zp.service.CompanyService;
+import com.hdn.zp.utils.DateUtils;
 import com.hdn.zp.utils.R;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
@@ -31,6 +32,13 @@ public class CompanyController extends BaseController {
 
     @Autowired
     private final CompanyService companyService;
+
+  /*  @PostMapping("insertCompany")
+    public int insertCompany(@RequestBody Company   company){
+        List<Company> list = new ArrayList<>();
+        list.add(company);
+        return companyService.insertCompany(list);
+    }*/
 
   /**
    * 分页查询

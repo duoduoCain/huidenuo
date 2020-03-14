@@ -3,16 +3,86 @@
 
 <mapper namespace="com.hdn.zp.dao.UserMapper">
 
-  <resultMap id="userMap" type="com.hdn.zp.model.User">
-                  <id property="id" column="id"/>
-                        <result property="username" column="username"/>
-                        <result property="password" column="password"/>
-                        <result property="telphone" column="telphone"/>
-                        <result property="email" column="email"/>
-                        <result property="wx" column="wx"/>
-                        <result property="status" column="status"/>
-                        <result property="regTime" column="reg_time"/>
-                        <result property="createTime" column="create_time"/>
-                        <result property="modifyTime" column="modify_time"/>
-            </resultMap>
+    <resultMap id="userMap" type="com.hdn.zp.model.User">
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="password" column="password"/>
+        <result property="telphone" column="telphone"/>
+        <result property="email" column="email"/>
+        <result property="wx" column="wx"/>
+        <result property="status" column="status"/>
+        <result property="regTime" column="reg_time"/>
+        <result property="createTime" column="create_time"/>
+        <result property="modifyTime" column="modify_time"/>
+    </resultMap>
+
+    <sql id="baseCloums">
+       id, username, password, telphone, email, wx, status,
+       reg_time, create_time, modify_time
+    </sql>
+    <sql id="baseWhere">
+        <if test="username !=null  and  username !='' ">and username=#{username}</if>
+        <if test="password !=null  and  password !='' ">and password=#{password}</if>
+        <if test="telphone !=null  and  telphone !='' ">and telphone=#{telphone}</if>
+        <if test="email !=null  and  email !='' ">and email=#{email}</if>
+        <if test="wx !=null  and  wx !='' ">and wx=#{wx}</if>
+        <if test="status !=null  and  status !='' ">and status=#{status}</if>
+        <if test="reg_time !=null  and  reg_time !='' ">and reg_time=#{reg_time}</if>
+        <if test="create_time !=null  and  create_time !='' ">and create_time=#{create_time}</if>
+        <if test="modify_time !=null  and  modify_time !='' ">and modify_time=#{modify_time}</if>
+    </sql>
+
+    <select id="selectList" parameterType="com.hdn.zp.model.User" resultMap="userMap">
+        select  <include refid="baseCloums"></include>  from user where 1=1
+        <include
+                refid="baseWhere"></include>
+    </select>
+
+
+    <insert id="insertUser" parameterType="ArrayList" useGeneratedKeys="true" keyProperty="id">
+        insert into user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            username, password, telphone, email, wx, status,
+            reg_time, create_time, modify_time
+        </trim>
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                #{item.username},
+                #{item.password},
+                #{item.telphone},
+                #{item.email},
+                #{item.wx},
+                #{item.status},
+                #{item.reg_time},
+                #{item.create_time},
+                #{item.modify_time},
+            </trim>
+        </foreach>
+    </insert>
+
+    <update id="updateUser" parameterType="ArrayList">
+        <foreach collection="list" item="item" index="index" separator=";">
+            update user
+            <trim prefix="SET" suffixOverrides=",">
+                <if test="item.username != null  and item.username != ''">username = #{item.username},</if>
+                <if test="item.password != null  and  item.password !='' ">password =#{item.password}</if>
+                <if test="item.telphone != null  and  item.telphone !='' ">telphone =#{item.telphone}</if>
+                <if test="item.email != null  and  item.email !='' ">email =#{item.email}</if>
+                <if test="item.wx != null  and  item.wx !='' ">wx =#{item.wx}</if>
+                <if test="item.status != null  and  item.status !='' ">status =#{item.status}</if>
+                <if test="item.reg_time != null  and  item.reg_time !='' ">reg_time =#{item.reg_time}</if>
+                <if test="item.create_time != null  and  item.create_time !='' ">create_time =#{item.create_time}</if>
+                <if test="item.modify_time != null  and  item.modify_time !='' ">modify_time =#{item.modify_time}</if>
+            </trim>
+            where id = #{item.id}
+        </foreach>
+    </update>
+
+    <delete id="deleteUser" parameterType="com.hdn.zp.model.User">
+        DELETE FROM user
+        <if test="id !=null">
+            where user.id=#{id}
+        </if>
+    </delete>
 </mapper>
