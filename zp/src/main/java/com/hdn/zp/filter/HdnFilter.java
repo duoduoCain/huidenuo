@@ -1,14 +1,15 @@
 package com.hdn.zp.filter;
 
+import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hdn.zp.common.BusinessException;
-import com.hdn.zp.utils.Contants;
-import com.hdn.zp.utils.R;
-import com.hdn.zp.utils.ServletUtils;
-import com.hdn.zp.utils.StringUtils;
+import com.hdn.zp.utils.*;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +27,9 @@ import java.util.List;
 @WebFilter(urlPatterns = "/*",filterName = "hdnFilter")
 @Slf4j
 public class HdnFilter implements Filter {
+
+    @Resource
+    private RedisUtils redisUtils;
 
     private List<String> list =new ArrayList<String>();
 
@@ -46,6 +50,7 @@ public class HdnFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         String contextPath = req.getContextPath();
         String requestURI = req.getRequestURI();
+        redisUtils.set("aa1","cc",4000);
         log.debug("当前登陆的url是"+requestURI);
         if(list.contains(requestURI)){
             log.debug("系统白名单"+requestURI);
@@ -64,10 +69,14 @@ public class HdnFilter implements Filter {
             out.flush();
             return;
         }
-        //没有redis 做token缓存有点困难  打算做成数据库形式的
+        String token = redisUtils.get(Contants.TOKEN + header);
+        JSONObject object= (JSONObject) JSONObject.parse(token);
+        String phone = object.getString("phone");
+        String username = object.getString(Contants.CURRENT_USERNAME);
+        req.setAttribute(Contants.CURRENT_USERNAME,username);
+        req.setAttribute(Contants.CURRENT_PHONE,phone);
 
-
-       // filterChain.doFilter(servletRequest, servletResponse);
+        filterChain.doFilter(servletRequest, servletResponse);
 
     }
     public String convertObjectToJson(Object object) throws JsonProcessingException {
