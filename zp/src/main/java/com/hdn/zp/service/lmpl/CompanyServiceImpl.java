@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -27,28 +28,10 @@ public class CompanyServiceImpl extends ServiceImpl<CompanyMapper, Company> impl
     @Autowired
     private CompanyMapper companyMapper;
 
-    @Override
-    public List<Company> selectList(Company company) {
-       return companyMapper.selectList(company);
-
-    }
 
     @Override
-    public int insertCompany(List<Company> company) {
-        return companyMapper.insertCompany(company);
-
+    public List<Company> selectAll(Company company) {
+        List<Company> list = companyMapper.selectList(company);
+        return list;
     }
-
-    @Override
-    public int updateCompany(List<Company> company) {
-        return companyMapper.updateCompany(company);
-
-    }
-
-    @Override
-    public int deleteCompany(long id) {
-        return companyMapper.deleteCompany(id);
-
-    }
-
 }

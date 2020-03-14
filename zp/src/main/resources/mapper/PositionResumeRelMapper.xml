@@ -3,66 +3,13 @@
 
 <mapper namespace="com.hdn.zp.dao.PositionResumeRelMapper">
 
-    <resultMap id="positionResumeRelMap" type="com.hdn.zp.model.PositionResumeRel">
-        <id property="id" column="id"/>
-        <result property="positionid" column="positionId"/>
-        <result property="resumeid" column="resumeID"/>
-        <result property="tddate" column="tdDate"/>
-        <result property="status" column="status"/>
-        <result property="createTime" column="create_time"/>
-        <result property="modifyTime" column="modify_time"/>
-    </resultMap>
-    <sql id="baseCloums">
-        id, tdDate, status, create_time, modify_time
-    </sql>
-    <sql id="baseWhere">
-        <if test="tdDate !=null  and  tdDate !='' ">and tdDate=#{tdDate}</if>
-        <if test="status !=null  and  status !='' ">and status=#{status}</if>
-        <if test="create_time !=null  and  create_time !='' ">and create_time=#{create_time}</if>
-        <if test="modify_time !=null  and  modify_time !='' ">and modify_time=#{modify_time}</if>
-    </sql>
-
-    <select id="selectList" parameterType="com.hdn.zp.model.PositionResumeRel" resultMap="positionResumeRelMap">
-        select  <include refid="baseCloums"></include>  from position_resume_rel where 1=1
-        <include
-                refid="baseWhere"></include>
-    </select>
-
-
-    <insert id="insertPosition_ResumeRel" parameterType="ArrayList" useGeneratedKeys="true" keyProperty="id">
-        insert into position_resume_rel
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            tdDate, status, create_time, modify_time,
-        </trim>
-        values
-        <foreach collection="list" item="item" index="index" separator=",">
-            <trim prefix="(" suffix=")" suffixOverrides=",">
-                #{item.tdDate},
-                #{item.status},
-                #{item.create_time},
-                #{item.modify_time},
-            </trim>
-        </foreach>
-    </insert>
-
-    <update id="updatePosition_ResumeRel" parameterType="ArrayList">
-        <foreach collection="list" item="item" index="index" separator=";">
-            update position_resume_rel
-            <trim prefix="SET" suffixOverrides=",">
-                <if test="item.tdDate != null  and item.tdDate != ''">tdDate = #{item.tdDate},</if>
-                <if test="item.status != null  and  item.status !='' ">status =#{item.status}</if>
-                <if test="item.create_time != null  and  item.create_time !='' ">create_time =#{item.create_time}</if>
-                <if test="item.modify_time != null  and  item.modify_time !='' ">modify_time =#{item.modify_time}</if>
-            </trim>
-            where id = #{item.id}
-        </foreach>
-    </update>
-
-    <delete id="deletePosition_ResumeRel" parameterType="com.hdn.zp.model.PositionResumeRel">
-        DELETE FROM position_resume_rel
-        <if test="id !=null">
-            where position_resume_rel.id=#{id}
-        </if>
-    </delete>
-
+  <resultMap id="positionResumeRelMap" type="com.hdn.zp.model.PositionResumeRel">
+                  <id property="id" column="id"/>
+                        <result property="positionid" column="positionId"/>
+                        <result property="resumeid" column="resumeID"/>
+                        <result property="tddate" column="tdDate"/>
+                        <result property="status" column="status"/>
+                        <result property="createTime" column="create_time"/>
+                        <result property="modifyTime" column="modify_time"/>
+            </resultMap>
 </mapper>

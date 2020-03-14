@@ -2,14 +2,11 @@ package com.hdn.zp.controller;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.hdn.zp.model.PositionType;
 import com.hdn.zp.utils.R;
 import com.hdn.zp.model.Region;
 import com.hdn.zp.service.RegionService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 
 /**
@@ -36,18 +33,25 @@ public class RegionController {
     return  new R<>(regionService.page(page,Wrappers.query(region)));
   }
 
-  @GetMapping
-  public List<Region>  getselectListRegion(Region  region){
-    return regionService.selectList(region);
+
+  /**
+   * 通过id查询行政区域
+   * @param id id
+   * @return R
+   */
+  @GetMapping("/{id}")
+  public R getById(@PathVariable("id") Integer id){
+    return new R<>(regionService.getById(id));
   }
+
   /**
    * 新增行政区域
    * @param region 行政区域
    * @return R
    */
   @PostMapping
-  public int  getinsertRegion(List<Region>  region){
-    return   regionService.insertRegion(region);
+  public R save(@RequestBody Region region){
+    return new R<>(regionService.save(region));
   }
 
   /**
@@ -56,8 +60,8 @@ public class RegionController {
    * @return R
    */
   @PutMapping
-  public int  getupdateRegion(List<Region>  region){
-    return   regionService.updateRegion(region);
+  public R updateById(@RequestBody Region region){
+    return new R<>(regionService.updateById(region));
   }
 
   /**
@@ -66,7 +70,8 @@ public class RegionController {
    * @return R
    */
   @DeleteMapping("/{id}")
-  public int  getdeleteRegion(Long id){
-    return   regionService.deleteRegion(id);
+  public R removeById(@PathVariable Integer id){
+    return new R<>(regionService.removeById(id));
   }
+
 }

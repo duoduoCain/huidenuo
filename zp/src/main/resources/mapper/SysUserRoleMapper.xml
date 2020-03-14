@@ -3,55 +3,8 @@
 
 <mapper namespace="com.hdn.zp.dao.SysUserRoleMapper">
 
-    <resultMap id="sysUserRoleMap" type="com.hdn.zp.model.SysUserRole">
-        <id property="userId" column="user_id"/>
-        <result property="roleId" column="role_id"/>
-    </resultMap>
-
-    <sql id="baseCloums">
-       user_id, role_id,
-    </sql>
-    <sql id="baseWhere">
-        <if test="user_id !=null  and  user_id !='' ">and user_id=#{user_id}</if>
-        <if test="role_id !=null  and  role_id !='' ">and role_id=#{role_id}</if>
-    </sql>
-
-    <select id="selectList" parameterType="com.hdn.zp.model.SysUserRole" resultMap="sysUserRoleMap">
-        select  <include refid="baseCloums"></include>  from sys_user_role where 1=1
-        <include
-                refid="baseWhere"></include>
-    </select>
-
-
-    <insert id="insertSys_user_role" parameterType="ArrayList" useGeneratedKeys="true" keyProperty="id">
-        insert into sys_user_role
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            user_id, role_id,
-        </trim>
-        values
-        <foreach collection="list" item="item" index="index" separator=",">
-            <trim prefix="(" suffix=")" suffixOverrides=",">
-                #{item.user_id},
-                #{item.role_id},
-            </trim>
-        </foreach>
-    </insert>
-
-    <update id="updateSys_user_role" parameterType="ArrayList">
-        <foreach collection="list" item="item" index="index" separator=";">
-            update sys_user_role
-            <trim prefix="SET" suffixOverrides=",">
-                <if test="item.user_id != null  and item.user_id != ''">user_id = #{item.user_id},</if>
-                <if test="item.role_id != null  and  item.role_id !='' ">role_id =#{item.role_id}</if>
-            </trim>
-            where id = #{item.id}
-        </foreach>
-    </update>
-
-    <delete id="deleteRSys_user_role" parameterType="com.hdn.zp.model.SysUserRole">
-        DELETE FROM sys_user_role
-        <if test="id !=null">
-            where sys_user_role.user_id=#{id}
-        </if>
-    </delete>
+  <resultMap id="sysUserRoleMap" type="com.hdn.zp.model.SysUserRole">
+                  <id property="userId" column="user_id"/>
+                        <result property="roleId" column="role_id"/>
+            </resultMap>
 </mapper>

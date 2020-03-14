@@ -8,8 +8,6 @@ import com.hdn.zp.service.PositionResumeRelService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 
 /**
  * 职位简历关联表
@@ -35,9 +33,15 @@ public class PositionResumeRelController {
     return  new R<>(positionResumeRelService.page(page,Wrappers.query(positionResumeRel)));
   }
 
-  @GetMapping
-  public List<PositionResumeRel> getselectPositionResumeRel(PositionResumeRel  positionResumeRel){
-    return  positionResumeRelService.selectList(positionResumeRel);
+
+  /**
+   * 通过id查询职位简历关联表
+   * @param id id
+   * @return R
+   */
+  @GetMapping("/{id}")
+  public R getById(@PathVariable("id") Integer id){
+    return new R<>(positionResumeRelService.getById(id));
   }
 
   /**
@@ -46,26 +50,28 @@ public class PositionResumeRelController {
    * @return R
    */
   @PostMapping
-  public int  getinsertPositionResumeRel(List<PositionResumeRel>  positionResumeRel){
-    return   positionResumeRelService.insertPosition_ResumeRel(positionResumeRel);
+  public R save(@RequestBody PositionResumeRel positionResumeRel){
+    return new R<>(positionResumeRelService.save(positionResumeRel));
   }
+
   /**
    * 修改职位简历关联表
    * @param positionResumeRel 职位简历关联表
    * @return R
    */
   @PutMapping
-  public  int  getupdatePositionResumeRel(List<PositionResumeRel> positionResumeRel){
-    return  positionResumeRelService.updatePosition_ResumeRel(positionResumeRel);
+  public R updateById(@RequestBody PositionResumeRel positionResumeRel){
+    return new R<>(positionResumeRelService.updateById(positionResumeRel));
   }
+
   /**
    * 通过id删除职位简历关联表
    * @param id id
    * @return R
    */
   @DeleteMapping("/{id}")
-  public int  getdeletePositionResumeRel(Long  id){
-    return   positionResumeRelService.deletePosition_ResumeRel(id);
+  public R removeById(@PathVariable Integer id){
+    return new R<>(positionResumeRelService.removeById(id));
   }
 
 }

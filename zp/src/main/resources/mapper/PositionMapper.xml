@@ -3,115 +3,26 @@
 
 <mapper namespace="com.hdn.zp.dao.PositionMapper">
 
-    <resultMap id="positionMap" type="com.hdn.zp.model.Position">
-        <id property="id" column="id"/>
-        <result property="name" column="name"/>
-        <result property="typeid" column="typeId"/>
-        <result property="describe" column="describe"/>
-        <result property="major" column="major"/>
-        <result property="education" column="education"/>
-        <result property="jobcity" column="jobcity"/>
-        <result property="jobnumber" column="jobnumber"/>
-        <result property="salary" column="salary"/>
-        <result property="sex" column="sex"/>
-        <result property="minage" column="minage"/>
-        <result property="maxage" column="maxage"/>
-        <result property="contact" column="contact"/>
-        <result property="phone" column="phone"/>
-        <result property="email" column="email"/>
-        <result property="publisher" column="publisher"/>
-        <result property="pubdate" column="pubdate"/>
-        <result property="status" column="status"/>
-        <result property="createTime" column="create_time"/>
-        <result property="modifyTime" column="modify_time"/>
-    </resultMap>
-    <sql id="baseColumns">
-         id , name, describe, major, education, jobnumber, salary, sex, minage, maxage,
-         contact, phone, email, publisher, pubdate, status, create_time, modify_time
-      </sql>
-    <sql id="baseWhere">
-        <if test="name != null and name != '' ">and name = #{name}</if>
-        <if test="describe != null and describe !='' ">and describe =#{describe}</if>
-        <if test="major != null  and  major!='' ">and major =#{major}</if>
-        <if test="education != null and  education !='' ">and education =#{education}</if>
-        <if test="jobnumber != null and  jobnumber !='' ">and jobnumber =#{jobnumber}</if>
-        <if test="sex != null and  sex !='' ">and sex =#{sex}</if>
-        <if test="minage != null and  minage !='' ">and minage =#{minage}</if>
-        <if test="maxage != null and  maxage !='' ">and maxage =#{maxage}</if>
-        <if test="contact != null and  contact !='' ">and contact =#{contact}</if>
-        <if test="phone != null and  phone !='' ">and phone =#{phone}</if>
-        <if test="email != null and  email !='' ">and email =#{email}</if>
-        <if test="publisher != null and  publisher !='' ">and publisher =#{publisher}</if>
-        <if test="pubdate != null and  pubdate !='' ">and pubdate =#{pubdate}</if>
-        <if test="status != null and  status !='' ">and status =#{status}</if>
-        <if test="create_time != null and  create_time !='' ">and create_time =#{create_time}</if>
-        <if test="modify_time != null and  modify_time !='' ">and modify_time =#{modify_time}</if>
-    </sql>
-
-    <select id="selectList" parameterType="com.hdn.zp.model.Position" resultMap="positionMap">
-        select  <include refid="baseColumns"></include> from position where 1=1 <include refid="baseWhere"></include>
-    </select>
-
-    <insert id="insertPosition" parameterType="ArrayList" useGeneratedKeys="true" keyProperty="id">
-        insert into position
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            name, describe, major, education, jobnumber, salary, sex, minage, maxage,
-            contact, phone, email, publisher, pubdate, status, create_time, modify_time,
-        </trim>
-        values
-        <foreach collection="list" item="item" index="index" separator=",">
-            <trim prefix="(" suffix=")" suffixOverrides=",">
-                #{item.name},
-                #{item.describe},
-                #{item.major},
-                #{item.education},
-                #{item.jobnumber},
-                #{item.salary},
-                #{item.sex},
-                #{item.minage},
-                #{item.maxage},
-                #{item.contact},
-                #{item.phone},
-                #{item.email},
-                #{item.publisher},
-                #{item.pubdate},
-                #{item.status},
-                #{item.create_time},
-                #{item.modify_time},
-            </trim>
-        </foreach>
-    </insert>
-
-    <update id="updatePosition" parameterType="ArrayList">
-        <foreach collection="list" item="item" index="index" separator=";">
-            update position
-            <trim prefix="SET" suffixOverrides=",">
-                <if test="item.name != null  and item.name != ''">name = #{item.name},</if>
-                <if test="item.describe != null  and  item.describe !='' ">describe =#{item.describe}</if>
-                <if test="item.major != null  and  item.major !='' ">major =#{item.major}</if>
-                <if test="item.education != null  and  item.education !='' ">education =#{item.education}</if>
-                <if test="item.jobnumber != null  and  item.jobnumber !='' ">jobnumber =#{item.jobnumber}</if>
-                <if test="item.salary != null  and  item.salary !='' ">salary =#{item.salary}</if>
-                <if test="item.sex != null  and  item.sex !='' ">sex =#{item.sex}</if>
-                <if test="item.minage != null  and  item.minage !='' ">minage =#{item.minage}</if>
-                <if test="item.maxage != null  and  item.maxage !='' ">maxage =#{item.maxage}</if>
-                <if test="item.contact != null  and  item.contact !='' ">contact =#{item.contact}</if>
-                <if test="item.phone != null  and  item.phone !='' ">phone =#{item.phone}</if>
-                <if test="item.email != null  and  item.email !='' ">email =#{item.email}</if>
-                <if test="item.publisher != null  and  item.publisher !='' ">publisher =#{item.publisher}</if>
-                <if test="item.pubdate != null  and  item.pubdate !='' ">pubdate =#{item.pubdate}</if>
-                <if test="item.status != null  and  item.status !='' ">status =#{item.status}</if>
-                <if test="item.create_time != null  and  item.create_time !='' ">create_time =#{item.create_time}</if>
-                <if test="item.modify_time != null  and  item.modify_time !='' ">modify_time =#{item.modify_time}</if>
-            </trim>
-            where id = #{item.id}
-        </foreach>
-    </update>
-
-    <delete id="deleteposition" parameterType="com.hdn.zp.model.Position">
-        DELETE   FROM   position
-        <if test="id !=null">
-            where  position.id=#{id}
-        </if>
-    </delete>
+  <resultMap id="positionMap" type="com.hdn.zp.model.Position">
+                  <id property="id" column="id"/>
+                        <result property="name" column="name"/>
+                        <result property="typeid" column="typeId"/>
+                        <result property="describe" column="describe"/>
+                        <result property="major" column="major"/>
+                        <result property="education" column="education"/>
+                        <result property="jobcity" column="jobcity"/>
+                        <result property="jobnumber" column="jobnumber"/>
+                        <result property="salary" column="salary"/>
+                        <result property="sex" column="sex"/>
+                        <result property="minage" column="minage"/>
+                        <result property="maxage" column="maxage"/>
+                        <result property="contact" column="contact"/>
+                        <result property="phone" column="phone"/>
+                        <result property="email" column="email"/>
+                        <result property="publisher" column="publisher"/>
+                        <result property="pubdate" column="pubdate"/>
+                        <result property="status" column="status"/>
+                        <result property="createTime" column="create_time"/>
+                        <result property="modifyTime" column="modify_time"/>
+            </resultMap>
 </mapper>

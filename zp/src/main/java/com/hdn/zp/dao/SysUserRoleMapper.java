@@ -3,9 +3,6 @@ package com.hdn.zp.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.hdn.zp.model.SysUserRole;
-import org.apache.ibatis.annotations.Param;
-
-import java.util.List;
 
 /**
  * 用户角色表
@@ -15,11 +12,4 @@ import java.util.List;
  */
 public interface SysUserRoleMapper extends BaseMapper<SysUserRole> {
 
-    public List<SysUserRole>  selectList(@Param("sysUserRole")  SysUserRole sysUserRole);
-
-    public int insertSys_user_role(@Param("sysUserRole") List<SysUserRole> sysUserRole);
-
-    public int  updateSys_user_role(@Param("sysUserRole") List<SysUserRole> sysUserRole);
-
-    public int   deleteRSys_user_role (@Param("id") Long id);
 }

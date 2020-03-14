@@ -99,11 +99,4 @@
             where id = #{item.id}
         </foreach>
     </update>
-
-    <delete id="deleteCompany" parameterType="com.hdn.zp.model.Company">
-        DELETE   FROM   company
-        <if test="id !=null">
-            where  company.id=#{id}
-        </if>
-    </delete>
 </mapper>

@@ -3,14 +3,11 @@ package com.hdn.zp.controller;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 
-import com.hdn.zp.model.Resume;
 import com.hdn.zp.model.SysUserRole;
 import com.hdn.zp.service.SysUserRoleService;
 import com.hdn.zp.utils.R;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 
 /**
@@ -40,13 +37,14 @@ public class SysUserRoleController {
 
   /**
    * 通过id查询用户角色表
-   * @param sysUserRole id
+   * @param userId id
    * @return R
    */
-  @GetMapping
-  public List<SysUserRole> getselectListSysUserRole(SysUserRole  sysUserRole){
-    return sysUserRoleService.selectList(sysUserRole);
+  @GetMapping("/{userId}")
+  public R getById(@PathVariable("userId") Long userId){
+    return new R<>(sysUserRoleService.getById(userId));
   }
+
   /**
    * 新增用户角色表
    * @param sysUserRole 用户角色表
@@ -54,8 +52,8 @@ public class SysUserRoleController {
    */
 
   @PostMapping
-  public  int  getinsertSysUserRole(List<SysUserRole> sysUserRole){
-    return sysUserRoleService.insertSys_user_role(sysUserRole);
+  public R save(@RequestBody SysUserRole sysUserRole){
+    return new R<>(sysUserRoleService.save(sysUserRole));
   }
 
   /**
@@ -65,18 +63,19 @@ public class SysUserRoleController {
    */
 
   @PutMapping
-  public  int  getupdateSysUserRole(List<SysUserRole> sysUserRole){
-    return sysUserRoleService.updateSys_user_role(sysUserRole);
+  public R updateById(@RequestBody SysUserRole sysUserRole){
+    return new R<>(sysUserRoleService.updateById(sysUserRole));
   }
 
   /**
    * 通过id删除用户角色表
-   * @param id id
+   * @param userId id
    * @return R
    */
 
-  @DeleteMapping("/{id}")
-  public  int  getdeleteSysUserRole(Long  id){
-    return sysUserRoleService.deleteRSys_user_role(id);
+  @DeleteMapping("/{userId}")
+  public R removeById(@PathVariable Long userId){
+    return new R<>(sysUserRoleService.removeById(userId));
   }
+
 }

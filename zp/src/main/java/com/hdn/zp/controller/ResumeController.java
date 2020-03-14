@@ -8,8 +8,6 @@ import com.hdn.zp.service.ResumeService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 
 /**
  * 简历表
@@ -36,27 +34,34 @@ public class ResumeController {
   }
 
 
-  @GetMapping
-  public List<Resume> getselectListResume(Resume  resume){
-    return resumeService.selectList(resume);
+  /**
+   * 通过id查询简历表
+   * @param id id
+   * @return R
+   */
+  @GetMapping("/{id}")
+  public R getById(@PathVariable("id") Integer id){
+    return new R<>(resumeService.getById(id));
   }
+
   /**
    * 新增简历表
    * @param resume 简历表
    * @return R
    */
   @PostMapping
-  public int getinsertResume(List<Resume> resume){
-    return resumeService.insertResume(resume);
+  public R save(@RequestBody Resume resume){
+    return new R<>(resumeService.save(resume));
   }
+
   /**
    * 修改简历表
    * @param resume 简历表
    * @return R
    */
   @PutMapping
-  public int getupdateResume(List<Resume> resume){
-    return resumeService.updateResume(resume);
+  public R updateById(@RequestBody Resume resume){
+    return new R<>(resumeService.updateById(resume));
   }
 
   /**
@@ -65,7 +70,8 @@ public class ResumeController {
    * @return R
    */
   @DeleteMapping("/{id}")
-  public int getdeleteResume(Long  id){
-    return resumeService.deleteResume(id);
+  public R removeById(@PathVariable Integer id){
+    return new R<>(resumeService.removeById(id));
   }
+
 }
