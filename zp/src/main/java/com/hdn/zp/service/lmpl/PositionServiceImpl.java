@@ -45,4 +45,9 @@ public class PositionServiceImpl extends ServiceImpl<PositionMapper, Position> i
         return positionMapper.deleteposition(id);
     }
 
+    @Override
+    public List<Position> selectHotCity(Long id) {
+        return positionMapper.selectHotCity(id);
+    }
+
 }

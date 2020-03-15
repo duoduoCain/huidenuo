@@ -21,4 +21,9 @@ public interface PositionService extends IService<Position> {
     public int  updatePosition(@Param("position") List<Position> position);
 
     public int  deleteposition(@Param("id") long id);
+
+    /**
+     * 查询热门城市
+     */
+    public List<Position>  selectHotCity(Long id);
 }
