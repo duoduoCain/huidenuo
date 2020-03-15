@@ -94,7 +94,8 @@
                 <if test="item.phone != null  and item.phone != ''">phone = #{item.phone},</if>
                 <if test="item.address != null ">address = #{item.address},</if>
                 <if test="item.createTime != null  and item.createTime != ''">create_time = #{item.createTime},</if>
-                <if test="item.modifyTime != null  and item.modifyTime != '' ">modify_time = #{item.modifyTime},</if>
+               <!-- <if test="item.modifyTime != null  and item.modifyTime != '' ">modify_time = #{item.modifyTime},</if>-->
+                modify_time = now(),
             </trim>
             where id = #{item.id}
         </foreach>
@@ -106,4 +107,5 @@
             where  company.id=#{id}
         </if>
     </delete>
+
 </mapper>

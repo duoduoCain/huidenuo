@@ -33,75 +33,73 @@ public class CompanyController extends BaseController {
     @Autowired
     private final CompanyService companyService;
 
-  /*  @PostMapping("insertCompany")
-    public int insertCompany(@RequestBody Company   company){
-        List<Company> list = new ArrayList<>();
-        list.add(company);
-        return companyService.insertCompany(list);
-    }*/
-
   /**
    * 分页查询
    * @param page 分页对象
    * @param company 企业注册表
    * @return
    */
-  @GetMapping("/page")
+  @RequestMapping(value = "page",method = RequestMethod.GET)
   public R getCompanyPage(Page page, Company company) {
     return  new R<>(companyService.page(page,Wrappers.query(company)));
   }
 
+    /**
+     * 查询企业注册表中数据
+     * @param company
+     * @return
+     */
   @RequestMapping(value = "getselectList",method = RequestMethod.GET)
   public List<Company>  getselectList(Company company){
    return companyService.selectList(company);
 
   }
-  @PostMapping("updateCompany")
-  public R<Integer> updateCompanyList(@RequestBody  Company company){
-      List<Company > companyList =new ArrayList<>();
-      company.setModifyTime(DateUtils.getNowDate());
-      companyList.add(company);
-      return R.ok(companyService.updateCompany(companyList));
-  }
-
-
   /**
    * 新增企业注册表
    * @param company 企业注册表
    * @return R
    */
   @RequestMapping(value = "getinsertCompany",method = RequestMethod.POST)
-   public int  getinsertCompany(@RequestBody Company  company){
+   public R  getinsertCompany(@RequestBody Company  company){
       List<Company>  list  = new ArrayList<>();
       list.add(company);
-    return companyService.insertCompany(list);
+    return R.ok(companyService.insertCompany(list));
   }
   /**
    * 修改企业注册表
-   * @param company 企业注册表
+   * @param company 企业注册表(单个)
    * @return R
    */
-  //这里要加请求路径
-  //批量更新做一个  单个更新做一个借口
-  @PutMapping
-  public   int  getupdateCompany(List<Company> company){
-      //更新的时候吧时间也更新了
-
-    //  DateUtils.getNowDateOnly();//这个可以获取当前时间
-      //时间格式是YYYY_MM_DD
-    //  DateUtils.getNowDate();//这个是获取 YYYY_MM_DD HH:MM:ss
-    return  companyService.updateCompany(company);
+  @RequestMapping(value = "getupdateCompany",method = RequestMethod.POST)
+  public   R  getupdateCompany(@RequestBody Company company){
+      List<Company>  list  = new ArrayList<>();
+    /*  company.setModifyTime(DateUtils.getNowDate());*/
+      list.add(company);
+    return  R.ok(companyService.updateCompany(list));
   }
+    /**
+     * 修改企业注册表
+     * @param company 企业注册表(多个)
+     * @return R
+     */
+    @RequestMapping(value = "getupdatemanyCompany",method = RequestMethod.POST)
+    public   R  getupdatemanyCompany(@RequestBody List<Company> company){
+        for(Company S:company){
+            getupdateCompany(S);
+        }
 
+        return  R.ok("成功");
+    }
 
   /**
    * 通过id删除企业注册表
    * @param id id
    * @return R
    */
-  //删除借口可以不做  这里加上标识的路径
-  @DeleteMapping("/delete/{id}")
-  public  int  getdeleteCompany(Long  id){
-    return  companyService.deleteCompany(id);
+
+  @RequestMapping(value = "delete/{id}",method = RequestMethod.POST)
+  public  R  getdeleteCompany(Long  id){
+    companyService.deleteCompany(id);
+    return R.ok("成功");
   }
 }

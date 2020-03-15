@@ -2,6 +2,7 @@ package com.hdn.zp.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.hdn.zp.model.Position;
+import com.hdn.zp.model.Region;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -22,4 +23,8 @@ public interface PositionMapper extends BaseMapper<Position> {
 
     public int  deleteposition(@Param("id") long id);
 
+    /**
+     * 查询热门城市
+     */
+    public List<Position>  selectHotCity(Long id);
 }

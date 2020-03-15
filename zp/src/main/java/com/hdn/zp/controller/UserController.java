@@ -10,6 +10,7 @@ import com.hdn.zp.utils.R;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -43,9 +44,9 @@ public class UserController {
    * @param user id
    * @return R
    */
-  @GetMapping
-  public List<User> getselectListUser(User  user){
-    return userService.selectList(user);
+  @RequestMapping(value = "getselectListUser",method = RequestMethod.GET)
+  public R getselectListUser(User  user){
+    return R.ok(userService.selectList(user));
   }
 
   /**
@@ -54,9 +55,11 @@ public class UserController {
    * @return R
    */
 
-  @PostMapping
-  public  int  getinsertUser(List<User>  user){
-    return  userService.insertUser(user);
+  @RequestMapping(value = "getinsertUser",method = RequestMethod.POST)
+  public  R  getinsertUser(@RequestBody User  user){
+    List<User>  list =new ArrayList<>();
+    list.add(user);
+    return  R.ok(userService.insertUser(list));
   }
   /**
    * 修改
@@ -64,7 +67,7 @@ public class UserController {
    * @return R
    */
 
-  @PutMapping
+  @RequestMapping(value = "getupdateUser",method = RequestMethod.POST)
   public  int  getupdateUser(List<User>  user){
     return  userService.updateUser(user);
   }
