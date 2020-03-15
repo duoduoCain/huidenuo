@@ -22,6 +22,9 @@ public class R<T> implements Serializable {
 	@Setter
 	private String msg = "success";
 
+	@Getter
+	@Setter
+	private int code=0;
 
     @Getter
 	@Setter
@@ -33,17 +36,20 @@ public class R<T> implements Serializable {
 
 	public R(T data) {
 		super();
+		this.code = 200;
 		this.data = data;
 	}
 
 	public R(T data, String msg) {
 		super();
+		this.code =200;
 		this.data = data;
 		this.msg = msg;
 	}
 
 	public R(Throwable e) {
 		super();
+		this.code = 500;
 		this.msg = e.getMessage();
 	}
 
@@ -55,16 +61,21 @@ public class R<T> implements Serializable {
         return new R(data);
     }
 	public static R error() {
-		return error(500, "未知异常，请联系管理员");
+		return error(500, "未知异常，请联系管理员",null);
 	}
 
-	public static R error(String msg) {
-		return error(500, msg);
+	public static <T> R error(String msg) {
+		return error(500, msg,null);
+	}
+	public static <T> R error(String msg,T t) {
+		return error(500, msg,null);
 	}
 
-	public static R error(int code, String msg) {
+	public static <T> R error(int code, String msg,T data) {
 		R r = new R();
 		r.msg = msg;
+		r.code = code;
+		r.data = data;
 		return r;
 	}
 

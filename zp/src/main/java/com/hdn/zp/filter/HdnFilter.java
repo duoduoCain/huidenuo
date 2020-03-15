@@ -59,24 +59,24 @@ public class HdnFilter implements Filter {
             filterChain.doFilter(servletRequest,servletResponse);
         }
         String header = req.getHeader(Contants.TOKEN);
-        if(StringUtils.isBlank(header)){
-            servletResponse.setContentType("application/json; charset=utf-8");
-            servletResponse.setCharacterEncoding("UTF-8");
-            R<String> r = new R<>();
-            r.setMsg("token失效");
-            log.error("token失效");
-            String userJson = convertObjectToJson(r);
-            OutputStream out = servletResponse.getOutputStream();
-            out.write(userJson.getBytes("UTF-8"));
-            out.flush();
-            return;
-        }
-        String token = redisUtils.get(Contants.TOKEN + header);
-        JSONObject object= (JSONObject) JSONObject.parse(token);
-        String phone = object.getString("phone");
-        String username = object.getString(Contants.CURRENT_USERNAME);
-        req.setAttribute(Contants.CURRENT_USERNAME,username);
-        req.setAttribute(Contants.CURRENT_PHONE,phone);
+//        if(StringUtils.isBlank(header)){
+//            servletResponse.setContentType("application/json; charset=utf-8");
+//            servletResponse.setCharacterEncoding("UTF-8");
+//            R<String> r = new R<>();
+//            r.setMsg("token失效");
+//            log.error("token失效");
+//            String userJson = convertObjectToJson(r);
+//            OutputStream out = servletResponse.getOutputStream();
+//            out.write(userJson.getBytes("UTF-8"));
+//            out.flush();
+//            return;
+//        }
+//        String token = redisUtils.get(Contants.TOKEN + header);
+//        JSONObject object= (JSONObject) JSONObject.parse(token);
+//        String phone = object.getString("phone");
+//        String username = object.getString(Contants.CURRENT_USERNAME);
+//        req.setAttribute(Contants.CURRENT_USERNAME,username);
+//        req.setAttribute(Contants.CURRENT_PHONE,phone);
 
 
         filterChain.doFilter(servletRequest, servletResponse);
