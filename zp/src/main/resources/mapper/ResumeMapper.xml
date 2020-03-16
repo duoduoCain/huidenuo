@@ -3,106 +3,119 @@
 
 <mapper namespace="com.hdn.zp.dao.ResumeMapper">
 
-  <resultMap id="resumeMap" type="com.hdn.zp.model.Resume">
-                  <id property="id" column="id"/>
-                        <result property="userId" column="user_id"/>
-                        <result property="resumeName" column="resume_name"/>
-                        <result property="resumePhone" column="resume_phone"/>
-                        <result property="resumeEmail" column="resume_email"/>
-                        <result property="sex" column="sex"/>
-                        <result property="birth" column="birth"/>
-                        <result property="college" column="college"/>
-                        <result property="major" column="major"/>
-                        <result property="education" column="education"/>
-                        <result property="location" column="location"/>
-                        <result property="job" column="job"/>
-                        <result property="salary" column="salary"/>
-                        <result property="technology" column="technology"/>
-                        <result property="experience" column="experience"/>
-                        <result property="introducation" column="introducation"/>
-            </resultMap>
-      <sql id="baseCloums">
+    <resultMap id="resumeMap" type="com.hdn.zp.model.Resume">
+        <id property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="resumeName" column="resume_name"/>
+        <result property="resumePhone" column="resume_phone"/>
+        <result property="resumeEmail" column="resume_email"/>
+        <result property="sex" column="sex"/>
+        <result property="birth" column="birth"/>
+        <result property="college" column="college"/>
+        <result property="major" column="major"/>
+        <result property="education" column="education"/>
+        <result property="location" column="location"/>
+        <result property="job" column="job"/>
+        <result property="salary" column="salary"/>
+        <result property="technology" column="technology"/>
+        <result property="experience" column="experience"/>
+        <result property="introducation" column="introducation"/>
+    </resultMap>
+    <sql id="baseCloums">
         id, resume_name, resume_phone, resume_email, sex, birth, college, major,
         education, location, job, salary, technology,experience,introducation
     </sql>
-      <sql id="baseWhere">
-            <if test="resume_name !=null  and  resume_name !='' ">and resume_name=#{resume_name}</if>
-            <if test="resume_phone !=null  and  resume_phone !='' ">and resume_phone=#{resume_phone}</if>
-            <if test="resume_email !=null  and  resume_email !='' ">and resume_email=#{resume_email}</if>
-            <if test="sex !=null  and  sex !='' ">and sex=#{sex}</if>
-            <if test="birth !=null  and  birth !='' ">and birth=#{birth}</if>
-            <if test="college !=null  and  college !='' ">and college=#{college}</if>
-            <if test="major !=null  and  major !='' ">and major=#{major}</if>
-            <if test="education !=null  and  education !='' ">and education=#{education}</if>
-            <if test="location !=null  and  location !='' ">and location=#{location}</if>
-            <if test="job !=null  and  job !='' ">and job=#{job}</if>
-            <if test="salary !=null  and  salary !='' ">and salary=#{salary}</if>
-            <if test="technology !=null  and  technology !='' ">and technology=#{technology}</if>
-            <if test="experience !=null  and  experience !='' ">and experience=#{experience}</if>
-            <if test="introducation !=null  and  introducation !='' ">and introducation=#{introducation}</if>
-      </sql>
+    <sql id="baseWhere">
+        <if test="resume_name !=null  and  resume_name !='' ">and resume_name=#{resume_name}</if>
+        <if test="resume_phone !=null  and  resume_phone !='' ">and resume_phone=#{resume_phone}</if>
+        <if test="resume_email !=null  and  resume_email !='' ">and resume_email=#{resume_email}</if>
+        <if test="sex !=null  and  sex !='' ">and sex=#{sex}</if>
+        <if test="birth !=null  and  birth !='' ">and birth=#{birth}</if>
+        <if test="college !=null  and  college !='' ">and college=#{college}</if>
+        <if test="major !=null  and  major !='' ">and major=#{major}</if>
+        <if test="education !=null  and  education !='' ">and education=#{education}</if>
+        <if test="location !=null  and  location !='' ">and location=#{location}</if>
+        <if test="job !=null  and  job !='' ">and job=#{job}</if>
+        <if test="salary !=null  and  salary !='' ">and salary=#{salary}</if>
+        <if test="technology !=null  and  technology !='' ">and technology=#{technology}</if>
+        <if test="experience !=null  and  experience !='' ">and experience=#{experience}</if>
+        <if test="introducation !=null  and  introducation !='' ">and introducation=#{introducation}</if>
+    </sql>
 
-      <select id="selectList" parameterType="com.hdn.zp.model.Resume" resultMap="resumeMap">
-            select  <include refid="baseCloums"></include>  from resume where 1=1 <include
-              refid="baseWhere"></include>
-      </select>
+    <select id="selectList" parameterType="com.hdn.zp.model.Resume" resultMap="resumeMap">
+        select  <include refid="baseCloums"></include>  from resume where 1=1
+        <include
+                refid="baseWhere"></include>
+    </select>
 
 
-      <insert id="insertResume" parameterType="ArrayList" useGeneratedKeys="true" keyProperty="id">
-            insert into resume
+    <insert id="insertResume" parameterType="ArrayList" useGeneratedKeys="true" keyProperty="id">
+        insert into resume
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            resume_name, resume_phone, resume_email, sex, birth, college, major,
+            education, location, job, salary, technology,experience,introducation
+        </trim>
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
             <trim prefix="(" suffix=")" suffixOverrides=",">
-                  resume_name, resume_phone, resume_email, sex, birth, college, major,
-                  education, location, job, salary, technology,experience,introducation
+                #{item.resume_name},
+                #{item.resume_phone},
+                #{item.resume_email},
+                #{item.sex},
+                #{item.birth},
+                #{item.college},
+                #{item.major},
+                #{item.education},
+                #{item.location},
+                #{item.job},
+                #{item.salary},
+                #{item.technology},
+                #{item.experience},
+                #{item.introducation},
             </trim>
-            values
-            <foreach collection="list" item="item" index="index" separator=",">
-                  <trim prefix="(" suffix=")" suffixOverrides=",">
-                        #{item.resume_name},
-                        #{item.resume_phone},
-                        #{item.resume_email},
-                        #{item.sex},
-                        #{item.birth},
-                        #{item.college},
-                        #{item.major},
-                        #{item.education},
-                        #{item.location},
-                        #{item.job},
-                        #{item.salary},
-                        #{item.technology},
-                        #{item.experience},
-                        #{item.introducation},
-                  </trim>
-            </foreach>
-      </insert>
+        </foreach>
+    </insert>
 
-      <update id="updateResume" parameterType="ArrayList">
-            <foreach collection="list" item="item" index="index" separator=";">
-                  update resume
-                  <trim prefix="SET" suffixOverrides=",">
-                        <if test="item.resume_name != null  and item.resume_name != ''">resume_name = #{item.resume_name},</if>
-                        <if test="item.resume_phone != null  and item.resume_phone != ''">resume_phone = #{item.resume_phone},</if>
-                        <if test="item.resume_email != null  and  item.resume_email !='' ">resume_email =#{item.resume_email}</if>
-                        <if test="item.sex != null  and  item.sex !='' ">sex =#{item.sex}</if>
-                        <if test="item.birth != null  and  item.birth !='' ">birth =#{item.birth}</if>
-                        <if test="item.college != null  and item.college != ''">college = #{item.college}</if>
-                        <if test="item.major != null  and item.major != ''">major = #{item.major}</if>
-                        <if test="item.education != null  and  item.education !='' ">education =#{item.education}</if>
-                        <if test="item.location != null  and  item.location !='' ">location =#{item.location}</if>
-                        <if test="item.job != null  and  item.job !='' ">job =#{item.job}</if>
-                        <if test="item.salary != null  and  item.salary !='' ">salary =#{item.salary}</if>
-                        <if test="item.technology != null  and  item.technology !='' ">technology =#{item.technology}</if>
-                        <if test="item.experience != null  and  item.experience !='' ">experience =#{item.experience}</if>
-                        <if test="item.introducation != null  and  item.introducation !='' ">introducation =#{item.introducation}</if>
+    <update id="updateResume" parameterType="ArrayList">
+        <foreach collection="list" item="item" index="index" separator=";">
+            update resume
+            <trim prefix="SET" suffixOverrides=",">
+                <if test="item.resume_name != null  and item.resume_name != ''">resume_name = #{item.resume_name},</if>
+                <if test="item.resume_phone != null  and item.resume_phone != ''">resume_phone = #{item.resume_phone},
+                </if>
+                <if test="item.resume_email != null  and  item.resume_email !='' ">resume_email =#{item.resume_email}
+                </if>
+                <if test="item.sex != null  and  item.sex !='' ">sex =#{item.sex}</if>
+                <if test="item.birth != null  and  item.birth !='' ">birth =#{item.birth}</if>
+                <if test="item.college != null  and item.college != ''">college = #{item.college}</if>
+                <if test="item.major != null  and item.major != ''">major = #{item.major}</if>
+                <if test="item.education != null  and  item.education !='' ">education =#{item.education}</if>
+                <if test="item.location != null  and  item.location !='' ">location =#{item.location}</if>
+                <if test="item.job != null  and  item.job !='' ">job =#{item.job}</if>
+                <if test="item.salary != null  and  item.salary !='' ">salary =#{item.salary}</if>
+                <if test="item.technology != null  and  item.technology !='' ">technology =#{item.technology}</if>
+                <if test="item.experience != null  and  item.experience !='' ">experience =#{item.experience}</if>
+                <if test="item.introducation != null  and  item.introducation !='' ">introducation
+                    =#{item.introducation}
+                </if>
 
-                  </trim>
-                  where id = #{item.id}
-            </foreach>
-      </update>
+            </trim>
+            where id = #{item.id}
+        </foreach>
+    </update>
 
-      <delete id="deleteResume" parameterType="com.hdn.zp.model.Resume">
-            DELETE   FROM   resume
-            <if test="id !=null">
-                  where  resume.id=#{id}
-            </if>
-      </delete>
+    <delete id="deleteResume" parameterType="com.hdn.zp.model.Resume">
+        DELETE FROM resume
+        <if test="id !=null">
+            where resume.id=#{id}
+        </if>
+    </delete>
+
+    <select id="selectLineResume" parameterType="com.hdn.zp.model.Resume" resultMap="resumeMap">
+        select  <include refid="baseCloums"></include>   FROM resume r JOIN user u on u.id=r.user_id
+        <include refid="baseWhere"></include>
+        <if test="id!=null">
+            where u.id=#{id}
+        </if>
+    </select>
 </mapper>

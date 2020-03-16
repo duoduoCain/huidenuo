@@ -43,4 +43,9 @@ public class ResumeServiceImpl extends ServiceImpl<ResumeMapper, Resume> impleme
         return resumeMapper.deleteResume(id);
     }
 
+    @Override
+    public List<Resume> selectLineResume(Long id) {
+        return resumeMapper.selectLineResume(id);
+    }
+
 }

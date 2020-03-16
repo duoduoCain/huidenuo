@@ -21,4 +21,9 @@ public interface ResumeService extends IService<Resume> {
     public int updateResume(@Param("resume") List<Resume> resume);
 
     public int deleteResume(@Param("id") Long id);
+    /**
+     * 查询在线简历---我的(在已经遍历简历的情况下)
+     *
+     */
+    public List<Resume>  selectLineResume(Long id);
 }

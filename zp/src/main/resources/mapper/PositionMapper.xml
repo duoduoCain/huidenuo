@@ -117,8 +117,8 @@
 
     <select id="selectHotCity" parameterType="com.hdn.zp.model.Position" resultMap="positionMap">
         select <include refid="baseColumns"></include> from position  p JOIN region r on p.regionid= r.id<include refid="baseWhere"></include> ORDER BY pubdate DEC
-        <if test="region.id!= null">
-            where  region.id=#{id}
+        <if test="id!= null">
+            where  r.id=#{id}
         </if>
     </select>
 </mapper>

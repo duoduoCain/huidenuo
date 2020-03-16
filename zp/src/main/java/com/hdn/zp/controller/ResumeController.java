@@ -91,5 +91,12 @@ public class ResumeController {
     public int getdeleteResume(Long id) {
         return resumeService.deleteResume(id);
     }
-
+    /**
+     *
+     * 查看在线简历--我的(已经对简历编辑的情况下)
+     */
+    @RequestMapping(value = "",method = RequestMethod.GET)
+    public  R   getmylineResume(Long id){
+        return R.ok(resumeService.selectLineResume(id));
+    }
 }
