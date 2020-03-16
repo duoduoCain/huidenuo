@@ -83,7 +83,7 @@
                         <if test="item.short_spelling != null  and  item.short_spelling !='' ">short_spelling =#{item.short_spelling}</if>
                         <if test="item.creator != null  and  item.creator !='' ">creator =#{item.creator}</if>
                         <if test="item.create_time != null  and  item.create_time !='' ">path =#{item.create_time}</if>
-                        <if test="item.update_time != null  and  item.update_time !='' ">path =#{item.update_time}</if>
+                        update_time = now(),
                         <if test="item.modifier != null  and  item.modifier !='' ">path =#{item.modifier}</if>
                   </trim>
                   where id = #{item.id}

@@ -52,7 +52,7 @@
                 <if test="item.tdDate != null  and item.tdDate != ''">tdDate = #{item.tdDate},</if>
                 <if test="item.status != null  and  item.status !='' ">status =#{item.status}</if>
                 <if test="item.create_time != null  and  item.create_time !='' ">create_time =#{item.create_time}</if>
-                <if test="item.modify_time != null  and  item.modify_time !='' ">modify_time =#{item.modify_time}</if>
+                modify_time = now(),
             </trim>
             where id = #{item.id}
         </foreach>

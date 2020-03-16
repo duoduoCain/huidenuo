@@ -53,6 +53,20 @@ public class PositionController {
         list.add(position);
         return R.ok(positionService.insertPosition(list));
     }
+    /**
+     * 新增职位表
+     *
+     * @param position 职位表(多个)
+     * @return R
+     */
+    @RequestMapping(value = "publishJob", method = RequestMethod.POST)
+    public R publishJob(@RequestBody List<Position> position) {
+        for (Position  P:position){
+            getinsertPosition(P);
+        }
+        return R.ok("成功");
+    }
+
 
     /**
      * 修改职位表
@@ -101,4 +115,5 @@ public class PositionController {
     public R getHostCity(Long id) {
         return R.ok(positionService.selectHotCity(id));
     }
+
 }
