@@ -15,11 +15,11 @@ import java.util.List;
  */
 public interface SysUserRoleMapper extends BaseMapper<SysUserRole> {
 
-    public List<SysUserRole>  selectList(@Param("sysUserRole")  SysUserRole sysUserRole);
+    public List<SysUserRole>  selectList(  SysUserRole sysUserRole);
 
-    public int insertSys_user_role(@Param("sysUserRole") List<SysUserRole> sysUserRole);
+    public int insertSys_user_role( List<SysUserRole> sysUserRole);
 
-    public int  updateSys_user_role(@Param("sysUserRole") List<SysUserRole> sysUserRole);
+    public int  updateSys_user_role( List<SysUserRole> sysUserRole);
 
-    public int   deleteRSys_user_role (@Param("id") Long id);
+    public int   deleteRSys_user_role ( Long id);
 }

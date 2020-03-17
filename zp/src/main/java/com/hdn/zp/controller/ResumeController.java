@@ -49,7 +49,7 @@ public class ResumeController {
      * @param resume 简历表
      * @return R
      */
-    @RequestMapping(value = "", method = RequestMethod.POST)
+    @RequestMapping(value = "getinsertResume", method = RequestMethod.POST)
     public R getinsertResume(@RequestBody Resume resume) {
         List<Resume> list = new ArrayList<>();
         list.add(resume);

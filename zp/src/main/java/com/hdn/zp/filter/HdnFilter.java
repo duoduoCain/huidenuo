@@ -13,7 +13,6 @@ import javax.annotation.Resource;
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -49,14 +48,13 @@ public class HdnFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
 
         HttpServletRequest req = (HttpServletRequest) servletRequest;
-        String attribute = (String) req.getSession().getAttribute(Contants.TOKEN);
         String contextPath = req.getContextPath();
         String requestURI = req.getRequestURI();
         redisUtils.set("aa1","cc",4000);
+        filterChain.doFilter(servletRequest,servletResponse);
         log.debug("当前登陆的url是"+requestURI);
         if(list.contains(requestURI)){
             log.debug("系统白名单"+requestURI);
-            filterChain.doFilter(servletRequest,servletResponse);
         }
         String header = req.getHeader(Contants.TOKEN);
 //        if(StringUtils.isBlank(header)){
@@ -77,7 +75,6 @@ public class HdnFilter implements Filter {
 //        String username = object.getString(Contants.CURRENT_USERNAME);
 //        req.setAttribute(Contants.CURRENT_USERNAME,username);
 //        req.setAttribute(Contants.CURRENT_PHONE,phone);
-
 
         filterChain.doFilter(servletRequest, servletResponse);
 

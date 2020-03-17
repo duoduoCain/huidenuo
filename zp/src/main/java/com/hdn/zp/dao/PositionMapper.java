@@ -1,8 +1,12 @@
 package com.hdn.zp.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.hdn.zp.model.PageBean;
 import com.hdn.zp.model.Position;
 import com.hdn.zp.model.Region;
+import javafx.geometry.Pos;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -15,16 +19,20 @@ import java.util.List;
  */
 public interface PositionMapper extends BaseMapper<Position> {
 
-    public List<Position> selectList(@Param("position") Position position);
+    public List<Position> selectList(Position position);
 
-    public int  insertPosition(@Param("position") List<Position> position);
+    public int  insertPosition(List<Position> position);
 
-    public int  updatePosition(@Param("position") List<Position> position);
+    public int  updatePosition(List<Position> position);
 
-    public int  deleteposition(@Param("id") long id);
+    public int  deleteposition(Long id);
 
     /**
      * 查询热门城市
      */
-    public List<Position>  selectHotCity(Long id);
+//    public List<Position>  selectHotCity(PageBean pageBean);
+
+
+    public IPage<Position> selectHotCity(Page<Position> positionPage);
+
 }

@@ -1,7 +1,11 @@
 package com.hdn.zp.service.lmpl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.hdn.zp.dao.PositionMapper;
+import com.hdn.zp.model.PageBean;
 import com.hdn.zp.model.Position;
 import com.hdn.zp.service.PositionService;
 import org.slf4j.Logger;
@@ -10,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 职位表
@@ -46,8 +51,18 @@ public class PositionServiceImpl extends ServiceImpl<PositionMapper, Position> i
     }
 
     @Override
-    public List<Position> selectHotCity(Long id) {
-        return positionMapper.selectHotCity(id);
+    public List<Position> selectHotCity(PageBean  pageBean) {
+//        return positionMapper.selectHotCity(pageBean);
+        return null;
     }
+
+
+    @Override
+    public IPage<Position> selectPag(PageBean<Position> page, QueryWrapper<Position> wrapper) {
+
+        IPage<Position> page1 = positionMapper.selectPage(page, new QueryWrapper<>());
+        return page1;
+    }
+
 
 }

@@ -15,13 +15,13 @@ import java.util.List;
  */
 public interface ResumeMapper extends BaseMapper<Resume> {
 
-    public List<Resume> selectList(@Param("resume") Resume resume);
+    public List<Resume> selectList( Resume resume);
 
-    public int insertResume(@Param("resume") List<Resume> resume);
+    public int insertResume( List<Resume> resume);
 
-    public int updateResume(@Param("resume") List<Resume> resume);
+    public int updateResume( List<Resume> resume);
 
-    public int deleteResume(@Param("id") Long id);
+    public int deleteResume(Long id);
 
     /**
      * 查询在线简历---我的(在已经遍历简历的情况下)

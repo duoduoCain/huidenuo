@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * 行政区域
@@ -68,11 +69,11 @@ private static final long serialVersionUID = 1L;
     /**
    * 
    */
-    private LocalDateTime createTime;
+    private Date createTime;
     /**
    * 
    */
-    private LocalDateTime updateTime;
+    private Date updateTime;
     /**
    * 修改者
    */

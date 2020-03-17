@@ -6,10 +6,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hdn.zp.config.HdnAuthConfig;
-import com.hdn.zp.model.AuthVo;
-import com.hdn.zp.model.SysUser;
-import com.hdn.zp.model.UserAccessToken;
-import com.hdn.zp.model.WechatUser;
+import com.hdn.zp.model.*;
 import com.hdn.zp.service.SysUserService;
 import com.hdn.zp.service.UserService;
 import com.hdn.zp.utils.*;
@@ -18,7 +15,11 @@ import org.aspectj.weaver.ast.Var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
+import static com.hdn.zp.utils.R.ok;
 
 /**
  * Created by 多多啦 on 2020/3/15 0015.
@@ -66,7 +67,7 @@ public class WechatLoginService {
             log.error("出现错误");
             return new R(e);
         }
-        return R.ok(userAccessToken);
+        return ok(userAccessToken);
 //        getUserInfo(openId,accessToken);
 
 
@@ -86,12 +87,17 @@ public class WechatLoginService {
 //        return R.ok("ok");
     }
 
-    public R<WechatUser> getUserInfo(String openId, String accessToken){
+    /**
+     * 获取用户信息
+     * @param openId
+     * @param accessToken
+     * @return
+     */
+    public R<User> getUserInfo(String openId, String accessToken){
 
         String accessToken2UserinfoccessToken = AuthVo.ACCESS_TOKEN_2_USERINFO;
         String url = String.format(accessToken2UserinfoccessToken, accessToken, openId);
         String getString = HdnHttp.sendGet(url, null, null);
-
         if(!AuthVo.validateWechatString(getString,2)){
             return R.error("返回有误");
         }
@@ -101,11 +107,28 @@ public class WechatLoginService {
         WechatUser wechatUser =null;
         try {
             wechatUser = objectMapper.readValue(getString, WechatUser.class);
+            List<User> users = userService.selectList(new User());
+            for (int i = 0; i < users.size(); i++) {
+                String wx = users.get(i).getWx();
+                if(wechatUser.getOpenId().equals(wx)){
+                    return R.ok(users.get(i));
+                }
+            }
+            User user = new User();
+            user.setWx(wechatUser.getOpenId());
+            user.setUsername(wechatUser.getNickName());
+            List<User> list = new ArrayList<>();
+            list.add(user);
+            int i = userService.insertUser(list);
+            if(i>0){
+                return new R(user);
+            }
+            return R.error("插入数据裤失败");
         } catch (JsonProcessingException e) {
             log.error("出现错误");
             return new R(e);
         }
-        return R.ok(wechatUser);
+//        return R.ok(wechatUser);
 //        {
 //            "openid": "OPENID",
 //                "nickname": "NICKNAME",
@@ -133,7 +156,7 @@ public class WechatLoginService {
     }
 
     public R<String> getUnionId(){
-        return R.ok("ok");
+        return ok("ok");
     }
 
 }
