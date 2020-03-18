@@ -1,7 +1,10 @@
 package com.hdn.zp.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.hdn.zp.model.PageBean;
 import com.hdn.zp.model.Position;
 import com.hdn.zp.service.PositionService;
 import com.hdn.zp.utils.R;
@@ -92,13 +95,12 @@ public class PositionController {
         for (Position S : position) {
             getupdatePosition(S);
         }
-
         return R.ok("成功");
     }
 
     /**
      * 通过id删除职位表
-     *
+     *b
      * @param id id
      * @return R
      */
@@ -111,9 +113,18 @@ public class PositionController {
      * 首页 ----查询热门岗位
      *
      */
-    @RequestMapping(value = "getHostCity", method = RequestMethod.POST)
-    public R getHostCity(Long id) {
-        return R.ok(positionService.selectHotCity(id));
+    @RequestMapping(value = "getHostCity", method = RequestMethod.GET)
+    public R getHostCity(Position position) {
+//        int  offset  =(pageBean.pageNo - 1) * pageBean.pageSize;
+//        System.out.println(pageBean.id);
+//        System.out.println(pageBean.pageNo);
+//        System.out.println(pageBean.pageSize);
+        PageBean<Position > positionPageBean = new PageBean<>(1,5);
+        QueryWrapper<Position> positionQueryWrapper = new QueryWrapper<>();
+        positionQueryWrapper.ge("id",position.getId());
+        IPage<Position> positionIPage = positionService.selectPag(positionPageBean, positionQueryWrapper);
+        List<Position> records = positionIPage.getRecords();
+        return R.ok(records);
     }
 
 }

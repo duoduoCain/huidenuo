@@ -26,9 +26,9 @@
         education, location, job, salary, technology,experience,introducation
     </sql>
     <sql id="baseWhere">
-        <if test="resume_name !=null  and  resume_name !='' ">and resume_name=#{resume_name}</if>
-        <if test="resume_phone !=null  and  resume_phone !='' ">and resume_phone=#{resume_phone}</if>
-        <if test="resume_email !=null  and  resume_email !='' ">and resume_email=#{resume_email}</if>
+        <if test="resumeName !=null  and  resumeName !='' ">and resume_name=#{resumeName}</if>
+        <if test="resumePhone !=null  and  resumePhone !='' ">and resume_phone=#{resumePhone}</if>
+        <if test="resumeEmail !=null  and  resumeEmail !='' ">and resume_email=#{resumeEmail}</if>
         <if test="sex !=null  and  sex !='' ">and sex=#{sex}</if>
         <if test="birth !=null  and  birth !='' ">and birth=#{birth}</if>
         <if test="college !=null  and  college !='' ">and college=#{college}</if>
@@ -58,9 +58,9 @@
         values
         <foreach collection="list" item="item" index="index" separator=",">
             <trim prefix="(" suffix=")" suffixOverrides=",">
-                #{item.resume_name},
-                #{item.resume_phone},
-                #{item.resume_email},
+                #{item.resumeName},
+                #{item.resumePhone},
+                #{item.resumeEmail},
                 #{item.sex},
                 #{item.birth},
                 #{item.college},

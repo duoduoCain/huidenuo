@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * 职位表
@@ -88,7 +89,7 @@ private static final long serialVersionUID = 1L;
     /**
    * 发布时间
    */
-    private LocalDateTime pubdate;
+    private Date pubdate;
     /**
    * 状态：0关闭1招聘中2重新打开
    */
@@ -96,10 +97,10 @@ private static final long serialVersionUID = 1L;
     /**
    * 创建时间
    */
-    private LocalDateTime createTime;
+    private Date createTime;
     /**
    * 修改时间
    */
-    private LocalDateTime modifyTime;
+    private Date modifyTime;
   
 }

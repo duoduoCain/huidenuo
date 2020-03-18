@@ -20,5 +20,5 @@ public interface CompanyMapper extends BaseMapper<Company> {
 
     public int  updateCompany(List<Company> company);
 
-    public int  deleteCompany(@Param("id") long id);
+    public int  deleteCompany(Long id);
 }

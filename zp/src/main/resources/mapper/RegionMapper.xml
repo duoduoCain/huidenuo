@@ -27,14 +27,14 @@
             <if test="code !=null  and  code !='' ">and code=#{code}</if>
             <if test="name !=null  and  name !='' ">and name=#{name}</if>
             <if test="level !=null  and  level !='' ">and level=#{level}</if>
-            <if test="sort_number !=null  and  sort_number !='' ">and sort_number=#{sort_number}</if>
+            <if test="sortNumber !=null  and  sortNumber !='' ">and sortNumber=#{sortNumber}</if>
             <if test="path !=null  and  path !='' ">and path=#{path}</if>
             <if test="abbr !=null  and  abbr !='' ">and abbr=#{abbr}</if>
             <if test="spelling !=null  and  spelling !='' ">and spelling=#{spelling}</if>
-            <if test="short_spelling !=null  and  short_spelling !='' ">and short_spelling=#{short_spelling}</if>
+            <if test="shortSpelling !=null  and  shortSpelling !='' ">and short_Spelling=#{shortSpelling}</if>
             <if test="creator !=null  and  creator !='' ">and creator=#{creator}</if>
-            <if test="create_time !=null  and  create_time !='' ">and create_time=#{create_time}</if>
-            <if test="update_time !=null  and  update_time !='' ">and update_time=#{update_time}</if>
+            <if test="createTime !=null  and  createTime !='' ">and create_Time=#{createTime}</if>
+            <if test="updateTime !=null  and  updateTime !='' ">and update_Time=#{updateTime}</if>
             <if test="modifier !=null  and  modifier !='' ">and modifier=#{modifier}</if>
       </sql>
 
@@ -76,7 +76,7 @@
                         <if test="item.code != null  and item.code != ''">code = #{item.code},</if>
                         <if test="item.name != null  and item.name != ''">name = #{item.name},</if>
                         <if test="item.level != null  and  item.level !='' ">level =#{item.level}</if>
-                        <if test="item.sort_number != null  and  item.sort_number !='' ">sort_number =#{item.sort_number}</if>
+                        <if test="item.sortNumber != null  and  item.sortNumber !='' ">sortNumber =#{item.sortNumber}</if>
                         <if test="item.path != null  and  item.path !='' ">path =#{item.path}</if>
                         <if test="item.abbr != null  and item.abbr != ''">abbr = #{item.abbr}</if>
                         <if test="item.spelling != null  and item.spelling != ''">spelling = #{item.spelling}</if>

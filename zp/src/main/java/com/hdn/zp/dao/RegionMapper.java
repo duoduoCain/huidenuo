@@ -14,12 +14,12 @@ import java.util.List;
  */
 public interface RegionMapper extends BaseMapper<Region> {
 
-    public List<Region> selectList(@Param("region") Region region);
+    public List<Region> selectList( Region region);
 
-    public int insertRegion(@Param("region") List<Region> region);
+    public int insertRegion( List<Region> region);
 
-    public int updateRegion(@Param("region") List<Region> region);
+    public int updateRegion( List<Region> region);
 
-    public int deleteRegion(@Param("id") Long id);
+    public int deleteRegion( Long id);
 
 }

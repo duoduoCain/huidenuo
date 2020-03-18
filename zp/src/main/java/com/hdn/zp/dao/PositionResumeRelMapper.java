@@ -14,12 +14,12 @@ import java.util.List;
  */
 public interface PositionResumeRelMapper extends BaseMapper<PositionResumeRel> {
 
-    public List<PositionResumeRel> selectList(@Param("positionResumeRel") PositionResumeRel positionResumeRel);
+    public List<PositionResumeRel> selectList(PositionResumeRel positionResumeRel);
 
-    public int insertPosition_ResumeRel(@Param("positionResumeRel") List<PositionResumeRel> positionResumeRel);
+    public int insertPosition_ResumeRel(List<PositionResumeRel> positionResumeRel);
 
-    public int updatePosition_ResumeRel(@Param("positionResumeRel") List<PositionResumeRel> positionResumeRel);
+    public int updatePosition_ResumeRel(List<PositionResumeRel> positionResumeRel);
 
-    public int deletePosition_ResumeRel(@Param("id") Long id);
+    public int deletePosition_ResumeRel(Long id);
 
 }

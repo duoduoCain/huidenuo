@@ -1,6 +1,7 @@
 package com.hdn.zp;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.hdn.zp.filter.HdnFilter;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -24,7 +25,7 @@ import javax.sql.DataSource;
 @SpringBootApplication
 @EnableTransactionManagement
 @ServletComponentScan
-@EnableAutoConfiguration
+/*@EnableAutoConfiguration*/
 public class ZpApplication extends SpringBootServletInitializer {
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
@@ -37,6 +38,12 @@ public class ZpApplication extends SpringBootServletInitializer {
         return new DruidDataSource();
     }
 
+    @Bean
+    public PaginationInterceptor paginationInterceptor() {
+        PaginationInterceptor page = new PaginationInterceptor();
+        page.setDialectType("mysql");
+        return page;
+    }
     @Bean
     public SqlSessionFactory sqlSessionFactoryBean() throws Exception {
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();

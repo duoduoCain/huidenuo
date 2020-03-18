@@ -13,12 +13,12 @@ import java.util.List;
  */
 public interface UserMapper extends BaseMapper<User> {
 
-    public List<User> selectList(@Param("user") User user);
+    public List<User> selectList( User user);
 
-    public int insertUser(@Param("user") List<User> user);
+    public int insertUser( List<User> user);
 
-    public int updateUser(@Param("user") List<User> user);
+    public int updateUser( List<User> user);
 
-    public int deleteUser(@Param("id") Long id);
+    public int deleteUser( Long id);
 
 }

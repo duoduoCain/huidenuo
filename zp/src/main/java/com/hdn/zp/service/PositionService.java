@@ -1,7 +1,11 @@
 package com.hdn.zp.service;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.hdn.zp.model.PageBean;
 import com.hdn.zp.model.Position;
+import com.hdn.zp.model.User;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -25,5 +29,7 @@ public interface PositionService extends IService<Position> {
     /**
      * 查询热门城市
      */
-    public List<Position>  selectHotCity(Long id);
+    public List<Position>  selectHotCity(PageBean  pageBean);
+
+    public IPage<Position> selectPag(PageBean<Position> page, QueryWrapper<Position> wrapper);
 }
