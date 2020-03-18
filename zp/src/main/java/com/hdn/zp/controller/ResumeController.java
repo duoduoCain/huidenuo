@@ -2,8 +2,6 @@ package com.hdn.zp.controller;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.hdn.zp.model.ExpenerceVo;
-import com.hdn.zp.model.ResumeVo;
 import com.hdn.zp.utils.R;
 import com.hdn.zp.model.Resume;
 import com.hdn.zp.service.ResumeService;
@@ -67,21 +65,21 @@ public class ResumeController {
      * @param  resumeVo简历表
      * @return R
      */
-    @RequestMapping(value = "addmanyExperience", method = RequestMethod.POST)
-    public R addmanyExperience(@RequestBody ResumeVo resumeVo) {
-
-        List<Resume> resumeList = resumeVo.getResumeList();
-
-        ExpenerceVo expenerceVo = resumeVo.getExpenerceVo();
-
-        //插入数据库
-
-        resumeService.insertResume(resumeList);
-
-
-
-        return R.ok("");
-    }
+//    @RequestMapping(value = "addmanyExperience", method = RequestMethod.POST)
+//    public R addmanyExperience(@RequestBody ResumeVo resumeVo) {
+//
+//        List<Resume> resumeList = resumeVo.getResumeList();
+//
+//        ExpenerceVo expenerceVo = resumeVo.getExpenerceVo();
+//
+//        //插入数据库
+//
+//        resumeService.insertResume(resumeList);
+//
+//
+//
+//        return R.ok("");
+//    }
 
     /**
      * 修改简历表
