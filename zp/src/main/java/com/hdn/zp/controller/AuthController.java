@@ -21,6 +21,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * Created by 多多啦 on 2020/3/14 0014.
@@ -63,7 +64,11 @@ public class AuthController extends BaseController{
             log.error("发送微信是出现错误");
         }
     }
-
+    public static void main(String[] args) {
+        Random random = new Random();
+        int nextInt = random.nextInt(12)+6;
+        System.out.println(nextInt);
+    }
 
     @RequestMapping("/wechatAuthRedirect")
     public void wechatAuthRedirect(@RequestParam("state")String state,

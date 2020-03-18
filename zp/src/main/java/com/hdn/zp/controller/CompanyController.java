@@ -41,6 +41,8 @@ public class CompanyController extends BaseController {
    */
   @RequestMapping(value = "page",method = RequestMethod.GET)
   public R getCompanyPage(Page page, Company company) {
+     page.setSize(1);
+     page.setTotal(10);
     return  new R<>(companyService.page(page,Wrappers.query(company)));
   }
 
