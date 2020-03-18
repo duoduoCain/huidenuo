@@ -76,7 +76,7 @@ public class HdnFilter implements Filter {
 //        req.setAttribute(Contants.CURRENT_USERNAME,username);
 //        req.setAttribute(Contants.CURRENT_PHONE,phone);
 
-        filterChain.doFilter(servletRequest, servletResponse);
+       /* filterChain.doFilter(servletRequest, servletResponse);*/
 
     }
     public String convertObjectToJson(Object object) throws JsonProcessingException {

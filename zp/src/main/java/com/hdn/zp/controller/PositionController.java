@@ -8,7 +8,6 @@ import com.hdn.zp.model.PageBean;
 import com.hdn.zp.model.Position;
 import com.hdn.zp.service.PositionService;
 import com.hdn.zp.utils.R;
-import javafx.geometry.Pos;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
@@ -96,7 +95,6 @@ public class PositionController {
         for (Position S : position) {
             getupdatePosition(S);
         }
-
         return R.ok("成功");
     }
 
